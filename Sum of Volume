@@ -1,0 +1,13 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © CutlossTrade
+
+//@version=5
+indicator("Bandarmology", format=format.volume)
+
+select = input(1)
+initialVolume = volume[select]
+
+BuyVolume = volume*((close-low)/(high-low))
+SellVolume = volume*((high-close)/(high-low))
+SumVolume = initialVolume-SellVolume+BuyVolume
+plot(SumVolume, style=plot.style_columns)
