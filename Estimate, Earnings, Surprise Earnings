@@ -4,10 +4,10 @@ indicator("Estimate, Earnings, Surprise Earnings", precision=2)
 symbol = syminfo.tickerid
 actual = request.earnings(symbol, earnings.actual)
 estimation = request.earnings(symbol, earnings.estimate)
-standardized = request.earnings(symbol, earnings.standardized)
 surprise = actual - estimation
+standardized = request.earnings(symbol, earnings.standardized)
 
-plot(estimation, title="Estimated Earnings", color=#FFFFFF, linewidth= 2)
+plot(estimation, title="Estimated Earnings", color=#FFFFFF, linewidth= 2, style=plot.style_stepline)
 plot(actual, title="Reported Earnings", color=(actual >= 0 ? color.new(#3861f6, 40) : color.new(#613cb0, 40)), style=plot.style_columns)
 plot(surprise, title="Earning Surprise", color=(surprise >= 0 ? color(#52a49a) : color(#dd5e56)), style=plot.style_columns)
-plot(standardized, title="Earning Surprise", color=(surprise >= 0 ? color(#52a49a) : color(#dd5e56)), style=plot.style_columns)
+plot(standardized, title="Standardized Earnings", color=(standardized >= 0 ? color.new(#3861f6, 40) : color.new(#613cb0, 40)), style=plot.style_columns, display=display.none)
