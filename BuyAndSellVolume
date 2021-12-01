@@ -1,0 +1,20 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © CutlossTrade
+
+//@version=5
+indicator("My Script", format=format.volume)
+//volLength = input(10)
+//difVol = ta.change(volume, 1)
+
+BuyVolume = volume*((close-low)/(high-low))
+//          100.1k * (3030-3000) / (3030-3000)
+//          100100
+SellVolume = volume*((high-close)/(high-low))
+//          100.1k * (3030-3030)/(3030-3000)
+//          0
+
+plot(volume, style=plot.style_line)
+plot(SellVolume, style=plot.style_columns)
+plot(BuyVolume, style=plot.style_columns)
+
+bgcolor(BuyVolume > SellVolume ? color.green : color.red)
