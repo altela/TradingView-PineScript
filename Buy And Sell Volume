@@ -1,8 +1,10 @@
+// This script are originally made by ceyhun (https://www.tradingview.com/u/ceyhun/)
+// Modification are made because i dont really find other indicator useful. Another modification is making this script available in pinescript 5
 // This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
 // © CutlossTrade
 
 //@version=5
-indicator("My Script", format=format.volume)
+indicator("Buy And Sell Volume", format=format.volume)
 //volLength = input(10)
 //difVol = ta.change(volume, 1)
 
@@ -14,7 +16,5 @@ SellVolume = volume*((high-close)/(high-low))
 //          0
 
 plot(volume, style=plot.style_line)
-plot(SellVolume, style=plot.style_columns)
-plot(BuyVolume, style=plot.style_columns)
-
-bgcolor(BuyVolume > SellVolume ? color.green : color.red)
+plot(SellVolume, style=plot.style_columns, color=#52a49a)
+plot(BuyVolume, style=plot.style_columns, color=#dd5e56)
