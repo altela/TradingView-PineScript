@@ -15,6 +15,6 @@ SellVolume = volume*((high-close)/(high-low))
 //          100.1k * (3030-3030)/(3030-3000)
 //          0
 
-plot(volume, style=plot.style_line)
-plot(SellVolume, style=plot.style_columns, color=#52a49a)
-plot(BuyVolume, style=plot.style_columns, color=#dd5e56)
+plot(volume, style=plot.style_columns, color=#ffffff, title="Total Volume")
+plot(SellVolume, style=plot.style_columns, color=#dd5e56, title="Sell Volume")
+plot(BuyVolume, style=plot.style_columns, color=#52a49a, title="Buy Volume")
