@@ -1,0 +1,30 @@
+// Script originally made by Kozlot on [Tradingview](https://www.tradingview.com/v/6eC8Fznf/)
+// Certain modification are made to upgrade script from pinescript v2 to v5
+// Other modification are removing background, changing signal shape & it's color
+
+//@version=5
+strategy('Heikin Ashi Bar Color Change Strategy', overlay=true)
+
+// Calculate Heikin Ashi Values 
+haopen = 0.0
+haclose = (open + high + low + close) / 4
+haopen := na(haopen[1]) ? (open + close) / 2 : (haopen[1] + haclose[1]) / 2
+hahigh = math.max(high, math.max(haopen, haclose))
+halow = math.min(low, math.min(haopen, haclose))
+
+// HA colors
+hacolor = haclose > haopen ? color.green : color.red
+
+// Signals
+turnGreen = haclose > haopen and haclose[1] <= haopen[1]
+turnRed = haclose <= haopen and haclose[1] > haopen[1]
+
+plotshape(turnGreen, style=shape.triangleup, location=location.belowbar, color=color.new(color.white, 0))
+plotshape(turnRed, style=shape.triangledown, location=location.abovebar, color=color.new(color.yellow, 0))
+
+// Alerts
+strategy.entry('long', strategy.long, when=turnGreen)
+strategy.entry('short', strategy.short, when=turnRed)
+
+// below is a custom signal alert message to remind you for buy or sell
+// {{ticker}} 4H Heikin Ashi signal to {{strategy.order.action}} @ {{close}} USDT.
