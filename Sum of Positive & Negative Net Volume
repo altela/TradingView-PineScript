@@ -1,14 +1,13 @@
-// This script are originally made by RafaelZioni (https://www.tradingview.com/u/RafaelZioni/) which named "net volume of positive and negative volume buy and sell alert"
+// This script are originally made by RafaelZioni (https://www.tradingview.com/u/RafaelZioni/) which named "net volume of positive and negative volume buy and sell alert"	
 // Current modification is only removing several signal that i find unecessary, and updating version from pinescript 3 to 5
 
 //@version=5
-indicator(title='Sum of Positive & Negative Net Volume')
+indicator(title='Sum of Positive & Negative Net Volume', format=format.volume)
 src = close
-Length = input(20)
+Length = input(100)
 change_1 = ta.change(src)
 nv = ta.change(src) > 0 ? volume : change_1 < 0 ? -volume : 0 * volume
 cnv = ta.cum(nv)
 cnv_tb = cnv - ta.sma(cnv, Length)
 
-plot(cnv_tb, color=cnv_tb >= 0 ? color(#52a49a) : color(#dd5e56), title='CNV', style=plot.style_columns)
-showZones = input(true, title='Show Bullish/Bearish Zones')
+plot(cnv_tb, color=cnv_tb >= 0 ? color(#52a49a) : color(#dd5e56), title='CNV', style=plot.style_stepline)
